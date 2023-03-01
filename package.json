@@ -1,0 +1,79 @@
+{
+  "name": "andromeda84-vscode",
+  "displayName": "Andromeda'84",
+  "description": "灵感来自于Andromeda和SynthWave'84",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "publisher": "liubailin",
+  "categories": [
+    "Themes"
+  ],
+  "activationEvents": [
+    "onCommand:Andromeda84.enableNeon",
+    "onCommand:Andromeda84.disableNeon"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "themes": [
+      {
+        "label": "Andromeda'84",
+        "uiTheme": "vs-dark",
+        "path": "./themes/Andromeda'84-color-theme.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "Andromeda84.enableNeon",
+        "title": "启用Andromeda'84霓虹灯效果"
+      },
+      {
+        "command": "Andromeda84.disableNeon",
+        "title": "关闭Andromeda'84霓虹灯效果"
+      }
+    ],
+    "configuration": {
+      "title": "Andromeda'84",
+      "properties": {
+        "Andromeda84.brightness": {
+          "type": "number",
+          "default": 0.45,
+          "description": "设置霓虹灯亮度,区间在0-1之间"
+        },
+        "Andromeda84.disableGlow": {
+          "type": "boolean",
+          "default": false,
+          "description": "启用或者禁用霓虹灯效果,会导致编辑器重启"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.1",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "~16.18.13",
+    "@types/vscode": "^1.75.0",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "@vscode/test-electron": "^2.2.2",
+    "eslint": "^8.33.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.1.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
