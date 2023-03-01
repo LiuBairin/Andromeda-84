@@ -1,5 +1,6 @@
 const vscode = require('vscode')
-
+const moudle = require('module')
+const path = require('path')
 /**
  * @summary 小数转换16进制
  * @param float
@@ -37,9 +38,13 @@ export function isVSCodeBelowVersion(version: string = '1.70.0') {
 export const basePath = (function () {
   const isWin = /^win/.test(process.platform)
 
+  // 解决webpack打包require的问题
+  const { createRequire } = moudle
+
+  const require = createRequire('/')
+
   const base =
-    process.cwd() +
-    (isWin ? '\\resources\\app\\out\\vs\\code' : '/resources/app/out/vs/code')
+    path.dirname(require.main.filename) + (isWin ? '\\vs\\code' : '/vs/code')
   const electronBase = isVSCodeBelowVersion()
     ? 'electron-browser'
     : 'electron-sandbox'
