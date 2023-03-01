@@ -10,6 +10,14 @@
   "categories": [
     "Themes"
   ],
+  "repository": {
+    "url": "https://github.com/lovebailin/Andromeda-84.git",
+    "type": "git"
+  },
+  "keywords": [
+    "Neon",
+    "84"
+  ],
   "activationEvents": [
     "onCommand:Andromeda84.enableNeon",
     "onCommand:Andromeda84.disableNeon"
