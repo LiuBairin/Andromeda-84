@@ -2,18 +2,18 @@ import * as vscode from 'vscode'
 const fs = require('fs')
 const path = require('path')
 import { convertHexadecimal, basePath } from './utils'
-import defaultTokenColors from './js/default_token_colors'
+import defaultTokenColors from './data/default_token_colors'
 // 将js写入neondreams
 function writeJsInTemplate(brightness: string, tokenColors: any) {
   return new Promise((resovle, reject) => {
     const templateFile = `${basePath}neondreams.js`
     // 读取插件文件
     const chromeStyles = fs.readFileSync(
-      path.dirname(__dirname) + '/src/css/editor_chrome.css',
+      __dirname + '/editor_chrome.css',
       'utf-8'
     )
     const jsTemplate = fs.readFileSync(
-      path.dirname(__dirname) + '/src/js/theme_template.js',
+      __dirname + '/theme_template.js',
       'utf-8'
     )
 
