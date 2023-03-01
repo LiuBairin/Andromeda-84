@@ -1,6 +1,5 @@
 import * as vscode from 'vscode'
 const fs = require('fs')
-const path = require('path')
 import { convertHexadecimal, basePath } from './utils'
 import defaultTokenColors from './data/default_token_colors'
 // 将js写入neondreams
