@@ -54,6 +54,11 @@
           "type": "object",
           "default": {},
           "description": "设置霓虹颜色,来替换默认设置"
+        },
+        "Andromeda84.disableGlow": {
+          "type": "boolean",
+          "default": false,
+          "description": "是否禁用霓虹灯,例如在发生一些未知错误的时候"
         }
       }
     }

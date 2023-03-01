@@ -38,23 +38,12 @@
     }, styles)
 
   /**
-   * @summary Checks if a theme is applied, and that the theme belongs to the Synthwave 84 family
-   * @returns {boolean}
-   */
-  const usingSynthwave = () => {
-    const appliedTheme = document.querySelector('[class*="theme-json"]')
-    const synthWaveTheme = document.querySelector(
-      '[class*="liubailin-andromeda84-vscode-themes"]'
-    )
-    return appliedTheme && synthWaveTheme
-  }
-
-  /**
    * @summary Attempts to bootstrap the theme
    * @param {boolean} disableGlow
    * @param {MutationObserver} obs
    */
-  const initNeonDreams = obs => {
+  const initNeonDreams = (disableGlow, obs) => {
+    if (disableGlow) return
     const tokensEl = document.querySelector('.vscode-tokens-styles')
 
     const initialThemeStyles = tokensEl.innerText
@@ -89,7 +78,7 @@
 
   function obCallback() {
     // 节流配合观察者实现霓虹灯
-    initNeonDreams(observer)
+    initNeonDreams([DISABLE_GLOW], observer)
   }
 
   observer.observe(targetNode, obConfig)
