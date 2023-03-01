@@ -2,9 +2,9 @@ import * as vscode from 'vscode'
 const fs = require('fs')
 const path = require('path')
 import { convertHexadecimal, basePath } from './utils'
-
+import defaultTokenColors from './js/default_token_colors'
 // 将js写入neondreams
-function writeJsInTemplate(disableGlow: boolean, brightness: string) {
+function writeJsInTemplate(brightness: string, tokenColors: any) {
   return new Promise((resovle, reject) => {
     const templateFile = `${basePath}neondreams.js`
     // 读取插件文件
@@ -17,11 +17,9 @@ function writeJsInTemplate(disableGlow: boolean, brightness: string) {
       'utf-8'
     )
 
-    console.log(disableGlow, brightness)
-
     // js文件进行替换
     const finalTheme = jsTemplate
-      .replace(/\[DISABLE_GLOW\]/g, disableGlow)
+      .replace(/\[TOKEN_COLORS\]/g, JSON.stringify(tokenColors))
       .replace(/\[NEON_BRIGHTNESS\]/g, brightness)
       .replace(/\[CHROME_STYLES\]/g, chromeStyles)
 
@@ -33,7 +31,7 @@ function writeJsInTemplate(disableGlow: boolean, brightness: string) {
 
 // html中写入script
 function writeScriptInHtml(htmlFile: string, html: string) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     let output = html.replace(
       /^.*(<!-- Andromeda84 --><script src="neondreams.js"><\/script><!-- NEON DREAMS -->).*\n?/gm,
       ''
@@ -51,7 +49,7 @@ function writeScriptInHtml(htmlFile: string, html: string) {
 
 // 从html中删除script
 function deleteScriptInHtml(htmlFile: string, html: string) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     let output = html.replace(
       /^.*(<!-- SYNTHWAVE 84 --><script src="neondreams.js"><\/script><!-- NEON DREAMS -->).*\n?/gm,
       ''
@@ -71,24 +69,37 @@ function getHtmlInfo() {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log('Congratulations, your extension "andromeda-84" is now active!')
-
-  let { brightness, disableGlow } =
+  let { brightness, tokenColors } =
     vscode.workspace.getConfiguration('Andromeda84')
 
   // 配置项
-  disableGlow = !!disableGlow
   brightness = convertHexadecimal(brightness)
+
+  // 颜色
+  tokenColors = tokenColors.length
+    ? { ...defaultTokenColors, ...tokenColors }
+    : defaultTokenColors
+
+  console.log(tokenColors)
 
   let enableNeon = vscode.commands.registerCommand(
     'Andromeda84.enableNeon',
     async () => {
-      await writeJsInTemplate(disableGlow, brightness)
+      await writeJsInTemplate(brightness, tokenColors)
 
       const { isEnabled, htmlFile, html } = getHtmlInfo()
 
       if (!isEnabled) {
-        await writeScriptInHtml(htmlFile, html)
+        try {
+          await writeScriptInHtml(htmlFile, html)
+        } catch (error: any) {
+          if (/ENOENT|EACCES|EPERM/.test(error.code)) {
+            vscode.window.showInformationMessage(
+              '你必须以管理员权限运行vscode才能启用'
+            )
+            return
+          }
+        }
         vscode.window
           .showInformationMessage(
             '开启霓虹灯。必须重新加载vscode才能使此更改生效。代码可能会显示已损坏的警告，这是正常的。您可以通过在通知上选择“不再显示此消息”来取消此消息。',
@@ -113,7 +124,6 @@ export function activate(context: vscode.ExtensionContext) {
     'Andromeda84.disableNeon',
     async () => {
       const { isEnabled, htmlFile, html } = getHtmlInfo()
-      console.log(isEnabled, htmlFile, html)
 
       if (isEnabled) {
         await deleteScriptInHtml(htmlFile, html)

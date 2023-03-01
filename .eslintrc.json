@@ -1,6 +1,6 @@
 {
   "root": true,
-  "parser": "@typescript-eslint/parser",
+  "parser": "@eslint-parser",
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"

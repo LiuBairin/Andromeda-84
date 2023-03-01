@@ -19,7 +19,7 @@
   .monaco-action-bar
   .badge
   .badge-content {
-  background: linear-gradient(to bottom, #fff951 25%, #fc28a8);
+  background: linear-gradient(to bottom, #7fdbca, #c789d6) !important;
 }
 
 /* Active tab neon */
@@ -48,7 +48,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(to right, #fc28a8, #03edf9) !important;
+  background: linear-gradient(to bottom, #7fdbca, #c789d6) !important;
   opacity: 1;
   z-index: 6;
 }
@@ -77,7 +77,7 @@
   > .content
   .monaco-action-bar
   .action-item.checked {
-  box-shadow: inset 0 -5px 25px #fc28a825;
+  box-shadow: inset 0 -5px 25px #28c7fc25;
   position: relative;
 }
 
@@ -93,7 +93,7 @@
   left: 0px;
   width: 4px;
   height: 100%;
-  background: linear-gradient(to bottom, #fc28a8, #03edf9) !important;
+  background: linear-gradient(to bottom, #7fdbca, #c789d6) !important;
   opacity: 1;
 }
 

@@ -1,9 +1,18 @@
-# Change Log
+# Andromeda '84 - VS Code theme
 
-All notable changes to the "andromeda-84" extension will be documented in this file.
+![](./images/icon.png)
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 具体代码颜色风格
 
-## [Unreleased]
+![](./images/code.png)
 
-- Initial release
+## 使用技巧
+
+![](./images/method.png)
+
+## 可以设置亮度和自定义颜色类型
+
+![](./images/style.png)
+![](./images/setting.png)
+
+## 特别鸣谢 Andromeda 和 synthwave’84 主题的开源仓库

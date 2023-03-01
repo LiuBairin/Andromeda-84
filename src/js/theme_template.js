@@ -2,41 +2,27 @@
   //====================================
   // Theme replacement CSS (Glow styles)
   //====================================
-  const tokenReplacements = {
-    /* green */
-    '96e072':
-      'color: #96e072; text-shadow: 0 0 2px #000, 0 0 10px #96e072[NEON_BRIGHTNESS], 0 0 5px #96e072[NEON_BRIGHTNESS], 0 0 25px #96e072[NEON_BRIGHTNESS]; backface-visibility: hidden;',
-    /* Neon pink */
-    f92672:
-      'color: #f92672; text-shadow: 0 0 2px #100c0f, 0 0 5px #f92672, 0 0 10px #fff3; backface-visibility: hidden;',
-    /* Yellow */
-    // '5f6167':
-    //   'color: #f4eee4; text-shadow: 0 0 2px #393a33, 0 0 8px #f39f05[NEON_BRIGHTNESS], 0 0 2px #f39f05[NEON_BRIGHTNESS]; backface-visibility: hidden;',
-    /* Green */
-    // '23262e':
-    //   'color: #72f1b8; text-shadow: 0 0 2px #100c0f, 0 0 10px #257c55[NEON_BRIGHTNESS], 0 0 35px #212724[NEON_BRIGHTNESS]; backface-visibility: hidden;',
-    /* Blue */
-    // b267e6:
-    //   'color: #fdfdfd; text-shadow: 0 0 2px #001716, 0 0 3px #03edf9[NEON_BRIGHTNESS], 0 0 5px #03edf9[NEON_BRIGHTNESS], 0 0 8px #03edf9[NEON_BRIGHTNESS]; backface-visibility: hidden;',
-  }
+  const tokenReplacements = [TOKEN_COLORS]
 
   //=============================
   // Helper functions
   //=============================
 
   /**
-   * @summary Check if the style element exists and that it has synthwave '84 color content
-   * @param {HTMLElement} tokensEl the style tag
-   * @param {object} replacements key/value pairs of colour hex and the glow styles to replace them with
-   * @returns {boolean}
+   * @summary 防抖函数
+   * @param {Function} fn
+   * @param {Number} delay
+   * @returns
    */
-  const themeStylesExist = (tokensEl, replacements) => {
-    return (
-      tokensEl.innerText !== '' &&
-      Object.keys(replacements).every(color => {
-        return tokensEl.innerText.toLowerCase().includes(`#${color}`)
-      })
-    )
+  function debounce(fn, delay = 250) {
+    let timer
+    return function (...args) {
+      timer && clearTimeout(timer)
+      timer = setTimeout(() => {
+        fn.apply(this, args)
+        timer = null
+      }, delay)
+    }
   }
 
   /**
@@ -64,89 +50,49 @@
   }
 
   /**
-   * @summary Checks if the theme is synthwave, and that the styles exist, ready for replacement
-   * @param {HTMLElement} tokensEl the style tag
-   * @param {object} replacements key/value pairs of colour hex and the glow styles to replace them with
-   * @returns
-   */
-  const readyForReplacement = (tokensEl, tokenReplacements) =>
-    tokensEl
-      ? // only init if we're using a Synthwave 84 subtheme
-        usingSynthwave() &&
-        // does it have content ?
-        themeStylesExist(tokensEl, tokenReplacements)
-      : false
-
-  /**
    * @summary Attempts to bootstrap the theme
    * @param {boolean} disableGlow
    * @param {MutationObserver} obs
    */
-  const initNeonDreams = (disableGlow, obs) => {
+  const initNeonDreams = obs => {
     const tokensEl = document.querySelector('.vscode-tokens-styles')
-
-    if (!tokensEl || !readyForReplacement(tokensEl, tokenReplacements)) {
-      return
-    }
 
     const initialThemeStyles = tokensEl.innerText
 
     // Replace tokens with glow styles
-    let updatedThemeStyles = !disableGlow
-      ? replaceTokens(initialThemeStyles, tokenReplacements)
-      : initialThemeStyles
+    let updatedThemeStyles = replaceTokens(
+      initialThemeStyles,
+      tokenReplacements
+    )
 
     /* append the remaining styles */
     updatedThemeStyles = `${updatedThemeStyles}[CHROME_STYLES]`
-
     const newStyleTag = document.createElement('style')
-    newStyleTag.setAttribute('id', 'synthwave-84-theme-styles')
     newStyleTag.innerText = updatedThemeStyles.replace(/(\r\n|\n|\r)/gm, '')
     document.body.appendChild(newStyleTag)
-
-    console.log("Synthwave '84: NEON DREAMS initialised!")
-
-    // disconnect the observer because we don't need it anymore
     if (obs) {
       obs.disconnect()
       obs = null
     }
-  }
-
-  /**
-   * @summary A MutationObserver callback that attempts to bootstrap the theme and assigns a retry attempt if it fails
-   */
-  const watchForBootstrap = function (mutationsList, observer) {
-    for (let mutation of mutationsList) {
-      if (mutation.type === 'attributes') {
-        // does the style div exist yet?
-        const tokensEl = document.querySelector('.vscode-tokens-styles')
-        if (readyForReplacement(tokensEl, tokenReplacements)) {
-          // If everything we need is ready, then initialise
-          initNeonDreams([DISABLE_GLOW], observer)
-        } else {
-          // sometimes VS code takes a while to init the styles content, so if there stop this observer and add an observer for that
-          observer.disconnect()
-          observer.observe(tokensEl, { childList: true })
-        }
-      }
-      if (mutation.type === 'childList') {
-        const tokensEl = document.querySelector('.vscode-tokens-styles')
-        if (readyForReplacement(tokensEl, tokenReplacements)) {
-          // Everything we need should be ready now, so initialise
-          initNeonDreams([DISABLE_GLOW], observer)
-        }
-      }
-    }
+    // disconnect the observer because we don't need it anymore
   }
 
   //=============================
   // Start bootstrapping!
   //=============================
-  initNeonDreams([DISABLE_GLOW])
-  // Grab body node
-  const bodyNode = document.querySelector('body')
+
+  const targetNode = document.querySelector('body')
+
+  const obConfig = { childList: true }
+
+  const observer = new MutationObserver(debounce(obCallback, 2000))
+
+  function obCallback() {
+    // 节流配合观察者实现霓虹灯
+    initNeonDreams(observer)
+  }
+
+  observer.observe(targetNode, obConfig)
+
   // Use a mutation observer to check when we can bootstrap the theme
-  const observer = new MutationObserver(watchForBootstrap)
-  observer.observe(bodyNode, { attributes: true })
 })()

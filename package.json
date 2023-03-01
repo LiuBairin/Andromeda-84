@@ -14,6 +14,7 @@
     "url": "https://github.com/lovebailin/Andromeda-84.git",
     "type": "git"
   },
+  "icon": "/images/icon.png",
   "keywords": [
     "Neon",
     "84"
@@ -49,10 +50,10 @@
           "default": 0.45,
           "description": "设置霓虹灯亮度,区间在0-1之间"
         },
-        "Andromeda84.disableGlow": {
-          "type": "boolean",
-          "default": false,
-          "description": "启用或者禁用霓虹灯效果,会导致编辑器重启"
+        "Andromeda84.tokenColors": {
+          "type": "object",
+          "default": {},
+          "description": "设置霓虹颜色,来替换默认设置"
         }
       }
     }
