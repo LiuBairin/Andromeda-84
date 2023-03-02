@@ -140,7 +140,11 @@ export function activate(context: vscode.ExtensionContext) {
             vscode.commands.executeCommand('workbench.action.reloadWindow')
           })
       } else {
-        vscode.window.showInformationMessage('霓虹灯已经禁用')
+        vscode.window
+          .showInformationMessage('霓虹灯已经禁用')
+          .then(function (msg) {
+            vscode.commands.executeCommand('workbench.action.reloadWindow')
+          })
       }
     }
   )
