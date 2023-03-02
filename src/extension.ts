@@ -76,16 +76,15 @@ export function activate(context: vscode.ExtensionContext) {
   let { brightness, tokenColors, disableGlow } =
     vscode.workspace.getConfiguration('Andromeda84')
 
+  // 是否禁用
+  disableGlow = !!disableGlow
   // 配置项
   brightness = convertHexadecimal(brightness)
 
   // 颜色
-
   tokenColors = Object.keys(tokenColors).length
     ? { ...defaultTokenColors, ...tokenColors }
     : defaultTokenColors
-
-  console.log(tokenColors)
 
   let enableNeon = vscode.commands.registerCommand(
     'Andromeda84.enableNeon',
