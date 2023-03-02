@@ -8,7 +8,7 @@ function writeJsInTemplate(
   tokenColors: any,
   disableGlow: boolean
 ) {
-  return new Promise((resovle, reject) => {
+  return new Promise(resovle => {
     const templateFile = `${basePath}neondreams.js`
     // 读取插件文件
     const chromeStyles = fs.readFileSync(
@@ -72,7 +72,8 @@ function getHtmlInfo() {
   return { isEnabled, htmlFile, html }
 }
 
-export function activate(context: vscode.ExtensionContext) {
+// 获取配置
+function getCinfiguration() {
   let { brightness, tokenColors, disableGlow } =
     vscode.workspace.getConfiguration('Andromeda84')
 
@@ -86,9 +87,21 @@ export function activate(context: vscode.ExtensionContext) {
     ? { ...defaultTokenColors, ...tokenColors }
     : defaultTokenColors
 
+  return {
+    brightness,
+    tokenColors,
+    disableGlow,
+  }
+}
+
+export function activate(context: vscode.ExtensionContext) {
   let enableNeon = vscode.commands.registerCommand(
     'Andromeda84.enableNeon',
     async () => {
+      const { brightness, tokenColors, disableGlow } = getCinfiguration()
+
+      console.log(tokenColors)
+
       await writeJsInTemplate(brightness, tokenColors, disableGlow)
 
       const { isEnabled, htmlFile, html } = getHtmlInfo()

@@ -1,18 +1,7 @@
 # Andromeda '84 - VS Code theme
 
-![](./images/icon.png)
+## 问题解决:
 
-## 具体代码颜色风格
+- 亮度显示问题
 
-![](./images/code.png)
-
-## 使用技巧
-
-![](./images/method.png)
-
-## 可以设置亮度和自定义颜色类型
-
-![](./images/style.png)
-![](./images/setting.png)
-
-## 特别鸣谢 Andromeda 和 synthwave’84 主题的开源仓库
+- 设置样式不生效问题
