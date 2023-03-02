@@ -2,6 +2,7 @@ import * as vscode from 'vscode'
 const fs = require('fs')
 import { convertHexadecimal, basePath } from './utils'
 import defaultTokenColors from './data/default_token_colors'
+
 // 将js写入neondreams
 function writeJsInTemplate(
   brightness: string,
@@ -37,12 +38,12 @@ function writeJsInTemplate(
 function writeScriptInHtml(htmlFile: string, html: string) {
   return new Promise(resolve => {
     let output = html.replace(
-      /^.*(<!-- Andromeda84 --><script src="neondreams.js"><\/script><!-- NEON DREAMS -->).*\n?/gm,
+      /^.*(<!-- Andromeda84 --><script src="neondreams.js" defer><\/script><!-- NEON DREAMS -->).*\n?/gm,
       ''
     )
     output = html.replace(
       /\<\/html\>/g,
-      `	<!-- SYNTHWAVE 84 --><script src="neondreams.js"></script><!-- NEON DREAMS -->\n`
+      `	<!-- SYNTHWAVE 84 --><script src="neondreams.js" defer></script><!-- NEON DREAMS -->\n`
     )
     output += '</html>'
 
@@ -55,7 +56,7 @@ function writeScriptInHtml(htmlFile: string, html: string) {
 function deleteScriptInHtml(htmlFile: string, html: string) {
   return new Promise(resolve => {
     let output = html.replace(
-      /^.*(<!-- SYNTHWAVE 84 --><script src="neondreams.js"><\/script><!-- NEON DREAMS -->).*\n?/gm,
+      /^.*(<!-- SYNTHWAVE 84 --><script src="neondreams.js" defer><\/script><!-- NEON DREAMS -->).*\n?/gm,
       ''
     )
     fs.writeFileSync(htmlFile, output, 'utf-8')
@@ -154,7 +155,7 @@ export function activate(context: vscode.ExtensionContext) {
           })
       } else {
         vscode.window
-          .showInformationMessage('霓虹灯已经禁用')
+          .showInformationMessage('霓虹灯已经禁用', { title: '请重启vscode' })
           .then(function (msg) {
             vscode.commands.executeCommand('workbench.action.reloadWindow')
           })

@@ -1,29 +1,35 @@
 ;(function () {
   //====================================
+  // Theme Base CSS ()
+  //====================================
+
+  const BASE_TOKEN_COLORS = `
+  .mtk1 { color: #d5ced9; }
+  .mtk2 { color: #23262e; }
+  .mtk3 { color: #5f6167; }
+  .mtk4 { color: #00e8c6; }
+  .mtk5 { color: #f39c12; }
+  .mtk6 { color: #ffe66d; }
+  .mtk7 { color: #c6c0ff; }
+  .mtk8 { color: #ff00aa; }
+  .mtk9 { color: #f92672; }
+  .mtk10 { color: #c74ded; }
+  .mtk11 { color: #7cb7ff; }
+  .mtk12 { color: #ee5d43; }
+  .mtk13 { color: #96e072; }
+  .mtk14 { color: #6796e6; }
+  .mtk15 { color: #cd9731; }
+  .mtk16 { color: #f44747; }
+  .mtk17 { color: #b267e6; }
+  .mtki { font-style: italic; }
+  .mtkb { font-weight: bold; }
+  .mtku { text-decoration: underline; text-underline-position: under; }
+  .mtks { text-decoration: line-through; }
+  .mtks.mtku { text-decoration: underline line-through; text-underline-position: under; }`
+  //====================================
   // Theme replacement CSS (Glow styles)
   //====================================
   const tokenReplacements = [TOKEN_COLORS]
-
-  //=============================
-  // Helper functions
-  //=============================
-
-  /**
-   * @summary 防抖函数
-   * @param {Function} fn
-   * @param {Number} delay
-   * @returns
-   */
-  function debounce(fn, delay = 250) {
-    let timer
-    return function (...args) {
-      timer && clearTimeout(timer)
-      timer = setTimeout(() => {
-        fn.apply(this, args)
-        timer = null
-      }, delay)
-    }
-  }
 
   /**
    * @summary Search and replace colours within a CSS definition
@@ -42,46 +48,20 @@
    * @param {boolean} disableGlow
    * @param {MutationObserver} obs
    */
-  const initNeonDreams = (disableGlow, obs) => {
+  const initNeonDreams = disableGlow => {
     if (disableGlow) return
-    const tokensEl = document.querySelector('.vscode-tokens-styles')
 
-    const initialThemeStyles = tokensEl.innerText
+    let updatedThemeStyles = replaceTokens(BASE_TOKEN_COLORS, tokenReplacements)
 
-    // Replace tokens with glow styles
-    let updatedThemeStyles = replaceTokens(
-      initialThemeStyles,
-      tokenReplacements
-    )
-
-    /* append the remaining styles */
     updatedThemeStyles = `${updatedThemeStyles}[CHROME_STYLES]`
     const newStyleTag = document.createElement('style')
     newStyleTag.innerText = updatedThemeStyles.replace(/(\r\n|\n|\r)/gm, '')
     document.body.appendChild(newStyleTag)
-    if (obs) {
-      obs.disconnect()
-      obs = null
-    }
-    // disconnect the observer because we don't need it anymore
   }
 
   //=============================
   // Start bootstrapping!
   //=============================
 
-  const targetNode = document.querySelector('body')
-
-  const obConfig = { childList: true }
-
-  const observer = new MutationObserver(debounce(obCallback, 2000))
-
-  function obCallback() {
-    // 节流配合观察者实现霓虹灯
-    initNeonDreams([DISABLE_GLOW], observer)
-  }
-
-  observer.observe(targetNode, obConfig)
-
-  // Use a mutation observer to check when we can bootstrap the theme
+  initNeonDreams([DISABLE_GLOW])
 })()
