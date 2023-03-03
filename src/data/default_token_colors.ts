@@ -14,6 +14,9 @@ const defaultTokenColors = {
   // 紫色(关键字)
   c74ded:
     'color: #c74ded !important; text-shadow: 0 0 2px #001716, 0 0 5px #c74ded[NEON_BRIGHTNESS]; backface-visibility: hidden;',
+  // 关键字
+  '00e8c6':
+    'color: #fdfdfd !important; text-shadow: 0 0 2px #001716, 0 0 3px #03edf9[NEON_BRIGHTNESS], 0 0 5px #03edf9[NEON_BRIGHTNESS], 0 0 8px #03edf9[NEON_BRIGHTNESS]; backface-visibility: hidden;',
 }
 
 export default defaultTokenColors
