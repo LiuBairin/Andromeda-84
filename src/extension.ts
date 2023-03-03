@@ -3,6 +3,9 @@ const fs = require('fs')
 import { convertHexadecimal, basePath } from './utils'
 import defaultTokenColors from './data/default_token_colors'
 
+const scriptRegExp =
+  /^.*(<!-- SYNTHWAVE 84 --><script src="neondreams.js".*?><\/script><!-- NEON DREAMS -->).*\n?/gm
+
 // 将js写入neondreams
 function writeJsInTemplate(
   brightness: string,
@@ -37,10 +40,7 @@ function writeJsInTemplate(
 // html中写入script
 function writeScriptInHtml(htmlFile: string, html: string) {
   return new Promise(resolve => {
-    let output = html.replace(
-      /^.*(<!-- Andromeda84 --><script src="neondreams.js" defer><\/script><!-- NEON DREAMS -->).*\n?/gm,
-      ''
-    )
+    let output = html.replace(scriptRegExp, '')
     output = html.replace(
       /\<\/html\>/g,
       `	<!-- SYNTHWAVE 84 --><script src="neondreams.js" defer></script><!-- NEON DREAMS -->\n`
@@ -55,10 +55,7 @@ function writeScriptInHtml(htmlFile: string, html: string) {
 // 从html中删除script
 function deleteScriptInHtml(htmlFile: string, html: string) {
   return new Promise(resolve => {
-    let output = html.replace(
-      /^.*(<!-- SYNTHWAVE 84 --><script src="neondreams.js" defer><\/script><!-- NEON DREAMS -->).*\n?/gm,
-      ''
-    )
+    let output = html.replace(scriptRegExp, '')
     fs.writeFileSync(htmlFile, output, 'utf-8')
 
     resolve(undefined)
