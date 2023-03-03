@@ -56,7 +56,11 @@
   .monaco-editor .bracket-highlighting-27 { color: #ffd700 !important;text-shadow:none; }
   .monaco-editor .bracket-highlighting-28 { color: #da70d6 !important;text-shadow:none; }
   .monaco-editor .bracket-highlighting-29 { color: #179fff !important;text-shadow:none; }
-  span.
+   [class*="dyn-rule-"] {
+    background-color: var(--vscode-editorInlayHint-parameterBackground) !important;
+    color: var(--vscode-editorInlayHint-parameterForeground) !important;
+    text-shadow:none;
+   }
   `
   //====================================
   // Theme replacement CSS (Glow styles)
@@ -96,4 +100,23 @@
   //=============================
 
   initNeonDreams([DISABLE_GLOW])
+
+  let timer = setInterval(() => {
+    const nodeList = document.querySelectorAll('[class*="dyn-rule-"]')
+    if (!nodeList.length) return
+    const firstNodeClassName = nodeList[0].className
+    const secondNodeClassName = nodeList[1].className
+
+    if (nodeList.length && firstNodeClassName !== secondNodeClassName) {
+      const className = secondNodeClassName.split(' ')[1]
+      const style = `.${className} {background-color: transparent !important;}`
+      const newStyleTag = document.createElement('style')
+      newStyleTag.textContent = style
+      document.body.appendChild(newStyleTag)
+      clearInterval(timer)
+      // newStyleTag.innerHTML = `1111111`
+      // document.body.append(newStyleTag)
+      // clearInterval(timer)
+    }
+  }, 1000)
 })()
