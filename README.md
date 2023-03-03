@@ -1,18 +1,18 @@
 <div align="center">
 
-<img src="./images/logo.png" width="200"/>
+<img src="https://oss.xilingbm.com/extension/Andromeda84/logo.png" width="200"/>
 
 <br/>
 
-![use](./images/use.gif)
+![use](https://oss.xilingbm.com/extension/Andromeda84/use.gif)
 
 <br/>
 
-![vue](./images/theme-vue.png)
+![vue](https://oss.xilingbm.com/extension/Andromeda84/theme-vue.png)
 
 <br/>
 
-![ts](./images/theme-ts.png)
+![ts](https://oss.xilingbm.com/extension/Andromeda84/theme-ts.png)
 
 <br/>
 <br/>
@@ -23,4 +23,4 @@
 
 <br/>
 
-<img src="./images/Andromda.png" width="100" height="100"/> <img src="./images/SynthWave84.png" width="100" height="100"/>
+<img src="https://oss.xilingbm.com/extension/Andromeda84/Andromda.png" width="100" height="100"/> <img src="https://oss.xilingbm.com/extension/Andromeda84/SynthWave84.png" width="100" height="100"/>
