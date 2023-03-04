@@ -56,11 +56,6 @@
   .monaco-editor .bracket-highlighting-27 { color: #ffd700 !important;text-shadow:none; }
   .monaco-editor .bracket-highlighting-28 { color: #da70d6 !important;text-shadow:none; }
   .monaco-editor .bracket-highlighting-29 { color: #179fff !important;text-shadow:none; }
-   [class*="dyn-rule-"] {
-    background-color: var(--vscode-editorInlayHint-parameterBackground) !important;
-    color: var(--vscode-editorInlayHint-parameterForeground) !important;
-    text-shadow:none;
-   }
   `
   //====================================
   // Theme replacement CSS (Glow styles)
@@ -82,7 +77,6 @@
   /**
    * @summary Attempts to bootstrap the theme
    * @param {boolean} disableGlow
-   * @param {MutationObserver} obs
    */
   const initNeonDreams = disableGlow => {
     if (disableGlow) return
@@ -91,7 +85,7 @@
 
     updatedThemeStyles = `${updatedThemeStyles}[CHROME_STYLES]`
     const newStyleTag = document.createElement('style')
-    newStyleTag.innerText = updatedThemeStyles.replace(/(\r\n|\n|\r)/gm, '')
+    newStyleTag.textContent = updatedThemeStyles.replace(/(\r\n|\n|\r)/gm, '')
     document.body.appendChild(newStyleTag)
   }
 
@@ -101,22 +95,46 @@
 
   initNeonDreams([DISABLE_GLOW])
 
+  // 动态css匹配规则
+  const dynamicStyleRegExp = /^dyn-rule-(\d+)-(\d+)$/
+
+  // 这里是针对行内提示样式做出修改
   let timer = setInterval(() => {
-    const nodeList = document.querySelectorAll('[class*="dyn-rule-"]')
+    const nodeList = document.querySelectorAll(
+      '[class*="dyn-rule-"]:not(.colorpicker-color-decoration)'
+    )
+
     if (!nodeList.length) return
     const firstNodeClassName = nodeList[0].className
     const secondNodeClassName = nodeList[1].className
 
     if (nodeList.length && firstNodeClassName !== secondNodeClassName) {
-      const className = secondNodeClassName.split(' ')[1]
-      const style = `.${className} {background-color: transparent !important;}`
+      let index = 0
+      let className = secondNodeClassName.split(' ')[1]
+      let key = className.replace(dynamicStyleRegExp, '$1')
+
+      const dynRules = [
+        `[class*="dyn-rule-${key}"] {
+        background-color: var(--vscode-editorInlayHint-parameterBackground) !important;
+        color: var(--vscode-editorInlayHint-parameterForeground) !important;
+        text-shadow:none;
+       }`,
+      ]
+
+      while (index++ < 10) {
+        dynRules.push(
+          `.${className} {background-color: transparent !important;}`
+        )
+        className = className.replace(
+          dynamicStyleRegExp,
+          (_, __, $2) => `dyn-rule-${key}-${+$2 + 2}`
+        )
+      }
+
       const newStyleTag = document.createElement('style')
-      newStyleTag.textContent = style
+      newStyleTag.textContent = dynRules.join(' ')
       document.body.appendChild(newStyleTag)
       clearInterval(timer)
-      // newStyleTag.innerHTML = `1111111`
-      // document.body.append(newStyleTag)
-      // clearInterval(timer)
     }
   }, 1000)
 })()
