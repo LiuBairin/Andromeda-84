@@ -82,7 +82,6 @@
   /**
    * @summary Attempts to bootstrap the theme
    * @param {boolean} disableGlow
-   * @param {MutationObserver} obs
    */
   const initNeonDreams = disableGlow => {
     if (disableGlow) return
@@ -91,7 +90,7 @@
 
     updatedThemeStyles = `${updatedThemeStyles}[CHROME_STYLES]`
     const newStyleTag = document.createElement('style')
-    newStyleTag.innerText = updatedThemeStyles.replace(/(\r\n|\n|\r)/gm, '')
+    newStyleTag.textContent = updatedThemeStyles.replace(/(\r\n|\n|\r)/gm, '')
     document.body.appendChild(newStyleTag)
   }
 
@@ -101,6 +100,7 @@
 
   initNeonDreams([DISABLE_GLOW])
 
+  // 这里是针对行内提示样式做出修改
   let timer = setInterval(() => {
     const nodeList = document.querySelectorAll('[class*="dyn-rule-"]')
     if (!nodeList.length) return
@@ -108,15 +108,23 @@
     const secondNodeClassName = nodeList[1].className
 
     if (nodeList.length && firstNodeClassName !== secondNodeClassName) {
-      const className = secondNodeClassName.split(' ')[1]
-      const style = `.${className} {background-color: transparent !important;}`
+      const dynRules = []
+      let index = 0
+      let className = secondNodeClassName.split(' ')[1]
+      while (index++ < 10) {
+        dynRules.push(
+          `.${className} {background-color: transparent !important;}`
+        )
+        className = className.replace(
+          /^dyn-rule-(\d+)-(\d+)$/,
+          (_, $1, $2) => `dyn-rule-${$1}-${+$2 + 2}`
+        )
+      }
+
       const newStyleTag = document.createElement('style')
-      newStyleTag.textContent = style
+      newStyleTag.textContent = dynRules.join(' ')
       document.body.appendChild(newStyleTag)
       clearInterval(timer)
-      // newStyleTag.innerHTML = `1111111`
-      // document.body.append(newStyleTag)
-      // clearInterval(timer)
     }
   }, 1000)
 })()
