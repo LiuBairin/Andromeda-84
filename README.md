@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://oss.xilingbm.com/extension/Andromeda84/logo.png" width="200"/>
+<img src="/images/logo.gif" width="200"/>
 
 <br/>
 
