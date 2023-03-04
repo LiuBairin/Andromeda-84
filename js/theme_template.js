@@ -100,7 +100,10 @@
 
   // 这里是针对行内提示样式做出修改
   let timer = setInterval(() => {
-    const nodeList = document.querySelectorAll('[class*="dyn-rule-"]')
+    const nodeList = document.querySelectorAll(
+      '[class*="dyn-rule-"]:not(.colorpicker-color-decoration)'
+    )
+
     if (!nodeList.length) return
     const firstNodeClassName = nodeList[0].className
     const secondNodeClassName = nodeList[1].className
@@ -133,5 +136,5 @@
       document.body.appendChild(newStyleTag)
       clearInterval(timer)
     }
-  }, 1500)
+  }, 1000)
 })()
