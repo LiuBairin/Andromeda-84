@@ -56,11 +56,6 @@
   .monaco-editor .bracket-highlighting-27 { color: #ffd700 !important;text-shadow:none; }
   .monaco-editor .bracket-highlighting-28 { color: #da70d6 !important;text-shadow:none; }
   .monaco-editor .bracket-highlighting-29 { color: #179fff !important;text-shadow:none; }
-   [class*="dyn-rule-"] {
-    background-color: var(--vscode-editorInlayHint-parameterBackground) !important;
-    color: var(--vscode-editorInlayHint-parameterForeground) !important;
-    text-shadow:none;
-   }
   `
   //====================================
   // Theme replacement CSS (Glow styles)
@@ -100,6 +95,9 @@
 
   initNeonDreams([DISABLE_GLOW])
 
+  // 动态css匹配规则
+  const dynamicStyleRegExp = /^dyn-rule-(\d+)-(\d+)$/
+
   // 这里是针对行内提示样式做出修改
   let timer = setInterval(() => {
     const nodeList = document.querySelectorAll('[class*="dyn-rule-"]')
@@ -108,16 +106,25 @@
     const secondNodeClassName = nodeList[1].className
 
     if (nodeList.length && firstNodeClassName !== secondNodeClassName) {
-      const dynRules = []
       let index = 0
       let className = secondNodeClassName.split(' ')[1]
+      let key = className.replace(dynamicStyleRegExp, '$1')
+
+      const dynRules = [
+        `[class*="dyn-rule-${key}"] {
+        background-color: var(--vscode-editorInlayHint-parameterBackground) !important;
+        color: var(--vscode-editorInlayHint-parameterForeground) !important;
+        text-shadow:none;
+       }`,
+      ]
+
       while (index++ < 10) {
         dynRules.push(
           `.${className} {background-color: transparent !important;}`
         )
         className = className.replace(
-          /^dyn-rule-(\d+)-(\d+)$/,
-          (_, $1, $2) => `dyn-rule-${$1}-${+$2 + 2}`
+          dynamicStyleRegExp,
+          (_, __, $2) => `dyn-rule-${key}-${+$2 + 2}`
         )
       }
 
@@ -126,5 +133,5 @@
       document.body.appendChild(newStyleTag)
       clearInterval(timer)
     }
-  }, 1000)
+  }, 1500)
 })()
