@@ -43,7 +43,7 @@ function writeScriptInHtml(htmlFile: string, html: string) {
     let output = html.replace(scriptRegExp, '')
     output = html.replace(
       /\<\/html\>/g,
-      `	<!-- SYNTHWAVE 84 --><script src="neondreams.js" defer></script><!-- NEON DREAMS -->\n`
+      `	<!-- SYNTHWAVE 84 --><script src="neondreams.js" async></script><!-- NEON DREAMS -->\n`
     )
     output += '</html>'
 
