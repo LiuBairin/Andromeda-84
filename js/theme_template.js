@@ -99,7 +99,10 @@
   const dynamicStyleRegExp = /^dyn-rule-(\d+)-(\d+)$/
 
   // 这里是针对行内提示样式做出修改
+
   let timer = setInterval(() => {
+    console.log(11111)
+
     const nodeList = document.querySelectorAll(
       '[class*="dyn-rule-"]:not(.colorpicker-color-decoration)'
     )
