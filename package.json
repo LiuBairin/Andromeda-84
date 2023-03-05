@@ -2,7 +2,7 @@
   "name": "andromeda84-vscode",
   "displayName": "Andromeda'84",
   "description": "灵感来自于Andromeda和SynthWave'84",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "engines": {
     "vscode": "^1.75.0"
   },
