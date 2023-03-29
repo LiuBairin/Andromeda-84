@@ -3,6 +3,15 @@
 <img src="https://oss.xilingbm.com/extension/Andromeda84/logo.gif" width="200"/>
 
 <br/>
+<br/>
+
+<img src="https://img.shields.io/github/package-json/v/lovebailin/Andromeda-84.svg?style=for-the-badge&logo=github" />
+<img src="https://img.shields.io/github/stars/lovebailin/Andromeda-84.svg?logo=github&style=for-the-badge" />
+<img src="https://img.shields.io/github/languages/code-size/lovebailin/Andromeda-84.svg?color=green&style=for-the-badge" />
+<img src="https://img.shields.io/github/license/lovebailin/Andromeda-84.svg?style=for-the-badge&color=blueviolet" />
+
+<br/>
+<br/>
 
 ![use](https://oss.xilingbm.com/extension/Andromeda84/use.gif)
 
