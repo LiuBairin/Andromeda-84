@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="/images/logo.gif" width="200"/>
+<img src="https://oss.xilingbm.com/extension/Andromeda84/logo.gif" width="200"/>
 
 <br/>
 
@@ -18,6 +18,10 @@
 <br/>
 
 </div>
+
+> 如果喜欢本插件,请到插件主页给主题点个 5 星吧 (感谢!!!)
+
+<br/>
 
 > 特别鸣谢
 
