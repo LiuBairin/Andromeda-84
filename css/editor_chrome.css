@@ -20,6 +20,7 @@
   .badge
   .badge-content {
   background: linear-gradient(45deg, #7fdbca, #c789d6) !important;
+  color: #fff !important;
 }
 
 /* Active tab neon */
