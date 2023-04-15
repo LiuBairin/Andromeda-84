@@ -98,8 +98,6 @@ export function activate(context: vscode.ExtensionContext) {
     async () => {
       const { brightness, tokenColors, disableGlow } = getCinfiguration()
 
-      console.log(tokenColors)
-
       await writeJsInTemplate(brightness, tokenColors, disableGlow)
 
       const { isEnabled, htmlFile, html } = getHtmlInfo()
