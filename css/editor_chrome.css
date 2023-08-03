@@ -1,6 +1,6 @@
 .monaco-editor .margin,
 .monaco-editor .inputarea.ime-input {
-  background: #23262e;
+  background: var(--vscode-editorGutter-background);
 }
 
 /* Add the subtle gradient to the editor background */
