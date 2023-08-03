@@ -2,7 +2,7 @@
   "name": "andromeda84-vscode",
   "displayName": "Andromeda'84",
   "description": "灵感来自于Andromeda和SynthWave'84",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -30,6 +30,11 @@
         "label": "Andromeda'84",
         "uiTheme": "vs-dark",
         "path": "./themes/Andromeda'84-color-theme.json"
+      },
+      {
+        "label": "Andromeda'84-black",
+        "uiTheme": "vs-dark",
+        "path": "./themes/Andromeda'84-color-theme-black.json"
       }
     ],
     "commands": [
