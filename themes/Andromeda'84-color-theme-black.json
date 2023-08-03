@@ -34,12 +34,12 @@
 
     "progressBar.background": "#C668BA",
 
-    "list.activeSelectionBackground": "#000000",
+    "list.activeSelectionBackground": "#23262E",
     "list.activeSelectionForeground": "#00e8c6",
     "list.dropBackground": "#3a404e",
     "list.focusBackground": "#282b35",
     "list.focusForeground": "#eee",
-    "list.hoverBackground": "#000000",
+    "list.hoverBackground": "#23262E",
     "list.hoverForeground": "#eee",
     "list.inactiveSelectionBackground": "#000000",
     "list.inactiveSelectionForeground": "#00e8c6",
