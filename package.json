@@ -2,7 +2,7 @@
   "name": "andromeda84-vscode",
   "displayName": "Andromeda'84",
   "description": "灵感来自于Andromeda和SynthWave'84",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -19,22 +19,22 @@
     "Neon",
     "84"
   ],
+  "main": "./dist/extension.js",
   "activationEvents": [
     "onCommand:Andromeda84.enableNeon",
     "onCommand:Andromeda84.disableNeon"
   ],
-  "main": "./dist/extension.js",
   "contributes": {
     "themes": [
-      {
-        "label": "Andromeda'84",
-        "uiTheme": "vs-dark",
-        "path": "./themes/Andromeda'84-color-theme.json"
-      },
       {
         "label": "Andromeda'84-black",
         "uiTheme": "vs-dark",
         "path": "./themes/Andromeda'84-color-theme-black.json"
+      },
+      {
+        "label": "Andromeda'84",
+        "uiTheme": "vs-dark",
+        "path": "./themes/Andromeda'84-color-theme.json"
       }
     ],
     "commands": [
@@ -52,18 +52,13 @@
       "properties": {
         "Andromeda84.brightness": {
           "type": "number",
-          "default": 0.45,
+          "default": 0.6,
           "description": "设置霓虹灯亮度,区间在0-1之间"
         },
         "Andromeda84.tokenColors": {
           "type": "object",
           "default": {},
           "description": "设置霓虹颜色,来替换默认设置"
-        },
-        "Andromeda84.disableGlow": {
-          "type": "boolean",
-          "default": false,
-          "description": "是否禁用霓虹灯,例如在发生一些未知错误的时候"
         }
       }
     }
@@ -71,6 +66,7 @@
   "scripts": {
     "vscode:prepublish": "pnpm run package",
     "compile": "webpack",
+    "build": "webpack --mode production",
     "watch": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
     "compile-tests": "tsc -p . --outDir out",

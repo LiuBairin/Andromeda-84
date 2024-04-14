@@ -13,51 +13,42 @@
 <br/>
 <br/>
 
-![use](https://oss.xilingbm.com/extension/Andromeda84/use.gif)
+![gif](https://www.098540.xyz/Andromeda'84.gif)
 
 <br/>
 
-![vue](https://oss.xilingbm.com/extension/Andromeda84/theme-vue.png)
+![png](https://www.098540.xyz/Andromeda'84.png)
 
 <br/>
 
-![ts](https://oss.xilingbm.com/extension/Andromeda84/theme-ts.png)
+![png](https://www.098540.xyz/Andromeda'84-black.png)
 
 <br/>
 <br/>
 
-```js
-const defaultTokenColors = {
+```json
+{
   // 黄色
-  ffe66d:
-    'color: #f4eee4 !important; text-shadow: 0 0 2px #393a33, 0 0 8px #f39f05[NEON_BRIGHTNESS], 0 0 2px #f39f05[NEON_BRIGHTNESS]; backface-visibility: hidden;',
+  "ffe66d": "color: #f4eee4; text-shadow: 0 0 2px #393a33, 0 0 8px #f39f05[NEON_BRIGHTNESS], 0 0 2px #f39f05[NEON_BRIGHTNESS]; backface-visibility: hidden;",
   // 橙黄
-  f39c12:
-    'color: #f39c12 !important; text-shadow: 0 0 2px #001716, 0 0 3px #f39c12[NEON_BRIGHTNESS], 0 0 5px #f39c12[NEON_BRIGHTNESS]; backface-visibility: hidden;',
+  "f39c12": "color: #f39c12; text-shadow: 0 0 2px #001716, 0 0 3px #f39c12[NEON_BRIGHTNESS], 0 0 5px #f39c12[NEON_BRIGHTNESS]; backface-visibility: hidden;",
   // 紫色(组件)
-  c6c0ff:
-    'color: #c792ea !important; text-shadow: 0 0 2px #001716, 0 0 3px #ae46f3[NEON_BRIGHTNESS], 0 0 5px #ba6eec[NEON_BRIGHTNESS], 0 0 8px #c792ea[NEON_BRIGHTNESS]; backface-visibility: hidden;',
+  "c6c0ff": "color: #c792ea; text-shadow: 0 0 2px #001716, 0 0 3px #ae46f3[NEON_BRIGHTNESS], 0 0 5px #ba6eec[NEON_BRIGHTNESS], 0 0 8px #c792ea[NEON_BRIGHTNESS]; backface-visibility: hidden;",
   // 标签
-  d5ced9:
-    'color: #fdfdfd !important; text-shadow: 0 0 2px #001716, 0 0 3px #03edf9[NEON_BRIGHTNESS], 0 0 5px #03edf9[NEON_BRIGHTNESS], 0 0 8px #03edf9[NEON_BRIGHTNESS]; backface-visibility: hidden;',
+  "d5ced9": "color: #fdfdfd; text-shadow: 0 0 5px #001716, 0 0 5px #03edf9[NEON_BRIGHTNESS], 0 0 7px #03edf9[NEON_BRIGHTNESS], 0 0 10px #03edf9[NEON_BRIGHTNESS]; backface-visibility: hidden;",
   // 紫色(关键字)
-  c74ded:
-    'color: #c74ded !important; text-shadow: 0 0 2px #001716, 0 0 5px #c74ded[NEON_BRIGHTNESS]; backface-visibility: hidden;',
-  // 关键字
-  '00e8c6':
-    'color: #fdfdfd !important; text-shadow: 0 0 2px #001716, 0 0 3px #03edf9[NEON_BRIGHTNESS], 0 0 5px #03edf9[NEON_BRIGHTNESS], 0 0 8px #03edf9[NEON_BRIGHTNESS]; backface-visibility: hidden;',
+  "c74ded": "color: #c74ded; text-shadow: 0 0 2px #001716, 0 0 5px #c74ded[NEON_BRIGHTNESS]; backface-visibility: hidden;",
+  "00e8c6": "color: #00e8c6 ; text-shadow: 0 0 2px #001716, 0 0 3px #03edf9[NEON_BRIGHTNESS], 0 0 5px #03edf9[NEON_BRIGHTNESS], 0 0 8px #03edf9[NEON_BRIGHTNESS]; backface-visibility: hidden;"
 }
-
-export default defaultTokenColors
 ```
 
 </div>
 
-> 新增纯黑背景主题(通过切换主题更改,记得先关闭霓虹灯效果)
+> Andromeda-84 主题 1.0.0 重构完成
 
 <br/>
 
-> 如果喜欢本插件,请到插件主页给主题点个 5 星吧 (感谢!!!)
+> 欢迎 star!
 
 <br/>
 

@@ -4,6 +4,7 @@
 
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 //@ts-check
 /** @typedef {import('webpack').Configuration} WebpackConfig **/
 
@@ -31,6 +32,13 @@ const extensionConfig = {
     },
     // support reading TypeScript and JavaScript files, 📖 -> https://github.com/TypeStrong/ts-loader
     extensions: ['.ts', '.js'],
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        exclude: 'core.js',
+      }),
+    ],
   },
   module: {
     rules: [

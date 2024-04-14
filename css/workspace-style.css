@@ -2,8 +2,6 @@
 .monaco-editor .inputarea.ime-input {
   background: var(--vscode-editorGutter-background);
 }
-
-/* Add the subtle gradient to the editor background */
 .monaco-editor {
   background-color: transparent !important;
   background-image: linear-gradient(to bottom, #2a2139 75%, #34294f);
@@ -11,8 +9,6 @@
   background-position: top;
   background-repeat: no-repeat;
 }
-
-/* Sweet sunset dots */
 .monaco-workbench
   .activitybar
   > .content
@@ -22,8 +18,6 @@
   background: linear-gradient(45deg, #7fdbca, #c789d6) !important;
   color: #fff !important;
 }
-
-/* Active tab neon */
 .monaco-workbench
   .part.editor
   > .content
@@ -31,11 +25,8 @@
   > .title
   .tabs-container
   > .tab.sizing-fit.active {
-  /* box-shadow: inset 0 -5px 25px #fc28a825; */
   position: sticky;
 }
-
-/* Active tab stripe */
 .monaco-workbench
   .part.editor
   > .content
@@ -53,7 +44,6 @@
   opacity: 1;
   z-index: 6;
 }
-
 .monaco-workbench
   .part.editor
   > .content
@@ -71,8 +61,6 @@
   opacity: 0;
   z-index: 6;
 }
-
-/* Active sidebar item */
 .monaco-workbench
   .activitybar
   > .content
@@ -81,7 +69,6 @@
   position: relative;
   background-image: url('data:image/svg+xml;base64,ICAgIDxzdmcKICAgICAgCiAgICAgIHZpZXdCb3g9IjAgMCAxMDAgMTAwIgogICAgICB2ZXJzaW9uPSIxLjEiCiAgICAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgICAgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCiAgICA+CiAgICAgIDxzdHlsZT4KICAgICAgICAjYm9yZGVyIHsKICAgICAgICAgIHN0cm9rZTp1cmwoJyNsaW5lYXJHcmFkaWVudCcpOwogICAgICAgICAgc3Ryb2tlLWRhc2hhcnJheTogMCAzNjA7CiAgICAgICAgICBzdHJva2UtZGFzaG9mZnNldDogMDsKICAgICAgICAgIHN0cm9rZS13aWR0aDoyOwogICAgICAgICAgZmlsbDogdHJhbnNwYXJlbnQ7CiAgICAgICAgICBzdHJva2UtbGluZWNhcDpyb3VuZDsKICAgICAgICAgIGFuaW1hdGlvbjogY2hhbmdlTGVuZ3RoIDJzIGluZmluaXRlIGVhc2UtaW4tb3V0OwoKICAgICAgICB9CgoKCiAgICAgICAgQGtleWZyYW1lcyBjaGFuZ2VMZW5ndGggewogICAgICAgICAgdG8gewogICAgICAgICAgICBzdHJva2UtZGFzaG9mZnNldDogLTcyMDsKICAgICAgICAgICAgIHN0cm9rZS1kYXNoYXJyYXk6IDM2MDsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIDwvc3R5bGU+CgogICAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImxpbmVhckdyYWRpZW50IiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMTAwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzZlY2NlZSIgLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlNzQ2OTkiIC8+CiAgICAgIDwvbGluZWFyR3JhZGllbnQ+CgogICAgICA8cmVjdCB4PSI1IiB5PSI1IiB3aWR0aD0iOTAiIGhlaWdodD0iOTAiIGZpbGw9Im5vbmUiIGlkPSJib3JkZXIiIC8+CiAgICA8L3N2Zz4=');
 }
-
 .monaco-workbench
   .activitybar
   > .content
@@ -97,11 +84,9 @@
   background: linear-gradient(45deg, #7fdbca, #c789d6) !important;
   opacity: 1;
 }
-
 .monaco-workbench .active-item-indicator {
   display: none;
 }
-
 .monaco-workbench
   .activitybar
   > .content
@@ -116,14 +101,11 @@
   transition: opacity 1s;
   opacity: 0;
 }
-
-/* update lightbulb to be neon */
 .codicon-lightbulb-autofix:before,
 .codicon-light-bulb:before,
 .codicon-lightbulb:before {
   content: '';
 }
-
 .codicon-lightbulb-autofix:before .codicon-light-bulb:before,
 .codicon-lightbulb:before,
 .lightbulb-glyph {
@@ -131,7 +113,6 @@
     50% no-repeat !important;
   filter: drop-shadow(0 0 5px #03edf9);
 }
-
 .codicon-lightbulb-autofix:before,
 .codicon-light-bulb:before,
 .codicon-lightbulb:before {

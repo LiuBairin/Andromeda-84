@@ -1,38 +1,48 @@
 import * as vscode from 'vscode'
 const fs = require('fs')
-import { convertHexadecimal, basePath } from './utils'
-import defaultTokenColors from './data/default_token_colors'
+import { convertHexadecimal, basePath, compressionCss } from './utils'
+import defaultTokenColors from './config/default_token_colors'
 
-const scriptRegExp =
+export const scriptRegExp =
   /^.*(<!-- SYNTHWAVE 84 --><script src="neondreams.js".*?><\/script><!-- NEON DREAMS -->).*\n?/gm
+
+function replaceTokens(styles: string, replacements: Record<string, string>) {
+  return Object.keys(replacements).reduce((acc, color) => {
+    const re = new RegExp(`color: #${color};`, 'gi')
+    return acc.replace(re, replacements[color])
+  }, styles)
+}
 
 // 将js写入neondreams
 function writeJsInTemplate(
   brightness: string,
-  tokenColors: any,
-  disableGlow: boolean
+  tokenColors: Record<string, string>
 ) {
   return new Promise(resovle => {
-    const templateFile = `${basePath}neondreams.js`
-    // 读取插件文件
-    const chromeStyles = fs.readFileSync(
-      __dirname + '/editor_chrome.css',
-      'utf-8'
-    )
-    const jsTemplate = fs.readFileSync(
-      __dirname + '/theme_template.js',
+    const templateFile = basePath + 'neondreams.js'
+    // 读取文件
+    const workspaceStyles: string = fs.readFileSync(
+      __dirname + '/workspace-style.css',
       'utf-8'
     )
 
+    const vscodeTokensStyles: string = fs.readFileSync(
+      __dirname + '/vscode-tokens-styles.css',
+      'utf-8'
+    )
+
+    const core: string = fs.readFileSync(__dirname + '/core.js', 'utf-8')
+
+    const replaceTheme = replaceTokens(vscodeTokensStyles, tokenColors).replace(
+      /\[NEON_BRIGHTNESS\]/g,
+      brightness
+    )
+    const finalTheme = compressionCss(`${replaceTheme}${workspaceStyles}`)
     // js文件进行替换
-    const finalTheme = jsTemplate
-      .replace(/\[TOKEN_COLORS\]/g, JSON.stringify(tokenColors))
-      .replace(/\[NEON_BRIGHTNESS\]/g, brightness)
-      .replace(/\[DISABLE_GLOW\]/g, disableGlow)
-      .replace(/\[CHROME_STYLES\]/g, chromeStyles)
+    const corejs = core.replace(/\[FINAL_STYLES\]/g, finalTheme)
 
     // neondreamsjs 写入最终样式js
-    fs.writeFileSync(templateFile, finalTheme, 'utf-8')
+    fs.writeFileSync(templateFile, corejs, 'utf-8')
     resovle(undefined)
   })
 }
@@ -43,7 +53,7 @@ function writeScriptInHtml(htmlFile: string, html: string) {
     let output = html.replace(scriptRegExp, '')
     output = html.replace(
       /\<\/html\>/g,
-      `	<!-- SYNTHWAVE 84 --><script src="neondreams.js" async></script><!-- NEON DREAMS -->\n`
+      `	<!-- SYNTHWAVE 84 --><script src="neondreams.js"></script><!-- NEON DREAMS -->\n`
     )
     output += '</html>'
 
@@ -64,7 +74,7 @@ function deleteScriptInHtml(htmlFile: string, html: string) {
 
 // 获取html的相关信息
 function getHtmlInfo() {
-  const htmlFile = `${basePath}workbench.html`
+  const htmlFile = basePath + 'workbench.html'
   const html = fs.readFileSync(htmlFile, 'utf-8')
   const isEnabled = html.includes('neondreams.js')
   return { isEnabled, htmlFile, html }
@@ -72,11 +82,9 @@ function getHtmlInfo() {
 
 // 获取配置
 function getCinfiguration() {
-  let { brightness, tokenColors, disableGlow } =
+  let { brightness, tokenColors } =
     vscode.workspace.getConfiguration('Andromeda84')
 
-  // 是否禁用
-  disableGlow = !!disableGlow
   // 配置项
   brightness = convertHexadecimal(brightness)
 
@@ -88,17 +96,16 @@ function getCinfiguration() {
   return {
     brightness,
     tokenColors,
-    disableGlow,
   }
 }
 
 export function activate(context: vscode.ExtensionContext) {
-  let enableNeon = vscode.commands.registerCommand(
+  const enableNeon = vscode.commands.registerCommand(
     'Andromeda84.enableNeon',
     async () => {
-      const { brightness, tokenColors, disableGlow } = getCinfiguration()
+      const { brightness, tokenColors } = getCinfiguration()
 
-      await writeJsInTemplate(brightness, tokenColors, disableGlow)
+      await writeJsInTemplate(brightness, tokenColors)
 
       const { isEnabled, htmlFile, html } = getHtmlInfo()
 
@@ -115,7 +122,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
         vscode.window
           .showInformationMessage(
-            '开启霓虹灯。必须重新加载vscode才能使此更改生效。代码可能会显示已损坏的警告，这是正常的。您可以通过在通知上选择“不再显示此消息”来取消此消息。',
+            '霓虹灯已开启。必须重新加载vscode才能使此更改生效。代码可能会显示已损坏的警告，这是正常的。您可以通过在通知上选择“不再显示此消息”来取消此消息。',
             { title: '请重启vscode' }
           )
           .then(function (msg) {
@@ -123,7 +130,7 @@ export function activate(context: vscode.ExtensionContext) {
           })
       } else {
         vscode.window
-          .showInformationMessage('霓虹灯已经启用。重新加载以刷新JS设置。', {
+          .showInformationMessage('霓虹灯已经启用。重新加载以刷新设置。', {
             title: '请重启vscode',
           })
           .then(function (msg) {
@@ -133,7 +140,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   )
 
-  let disableNeon = vscode.commands.registerCommand(
+  const disableNeon = vscode.commands.registerCommand(
     'Andromeda84.disableNeon',
     async () => {
       const { isEnabled, htmlFile, html } = getHtmlInfo()
@@ -158,8 +165,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   )
 
-  context.subscriptions.push(enableNeon)
-  context.subscriptions.push(disableNeon)
+  context.subscriptions.push(enableNeon, disableNeon)
 }
 
 export function deactivate() {}

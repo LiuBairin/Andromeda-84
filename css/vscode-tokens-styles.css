@@ -1,0 +1,194 @@
+.mtk1 {
+  color: #d5ced9;
+}
+.mtk2 {
+  color: #23262e;
+}
+.mtk3 {
+  color: #5f6167;
+}
+.mtk4 {
+  color: #00e8c6;
+}
+.mtk5 {
+  color: #f39c12;
+}
+.mtk6 {
+  color: #ffe66d;
+}
+.mtk7 {
+  color: #c6c0ff;
+}
+.mtk8 {
+  color: #ff00aa;
+}
+.mtk9 {
+  color: #f92672;
+}
+.mtk10 {
+  color: #c74ded;
+}
+.mtk11 {
+  color: #7cb7ff;
+}
+.mtk12 {
+  color: #ee5d43;
+}
+.mtk13 {
+  color: #96e072;
+}
+.mtk14 {
+  color: #6796e6;
+}
+.mtk15 {
+  color: #cd9731;
+}
+.mtk16 {
+  color: #f44747;
+}
+.mtk17 {
+  color: #b267e6;
+}
+.mtki {
+  font-style: italic;
+}
+.mtkb {
+  font-weight: bold;
+}
+.mtku {
+  text-decoration: underline;
+  text-underline-position: under;
+}
+.mtks {
+  text-decoration: line-through;
+}
+.mtks.mtku {
+  text-decoration: underline line-through;
+  text-underline-position: under;
+}
+.monaco-editor .bracket-highlighting-0 {
+  color: #ffd700;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-1 {
+  color: #da70d6;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-2 {
+  color: #179fff;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-3 {
+  color: #ffd700;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-4 {
+  color: #da70d6;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-5 {
+  color: #179fff;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-6 {
+  color: #ffd700;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-7 {
+  color: #da70d6;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-8 {
+  color: #179fff;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-9 {
+  color: #ffd700;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-10 {
+  color: #da70d6;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-11 {
+  color: #179fff;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-12 {
+  color: #ffd700;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-13 {
+  color: #da70d6;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-14 {
+  color: #179fff;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-15 {
+  color: #ffd700;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-16 {
+  color: #da70d6;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-17 {
+  color: #179fff;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-18 {
+  color: #ffd700;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-19 {
+  color: #da70d6;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-20 {
+  color: #179fff;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-21 {
+  color: #ffd700;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-22 {
+  color: #da70d6;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-23 {
+  color: #179fff;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-24 {
+  color: #ffd700;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-25 {
+  color: #da70d6;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-26 {
+  color: #179fff;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-27 {
+  color: #ffd700;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-28 {
+  color: #da70d6;
+  text-shadow: none;
+}
+.monaco-editor .bracket-highlighting-29 {
+  color: #179fff;
+  text-shadow: none;
+}
+[class*='dyn-rule-']:not(.colorpicker-color-decoration) {
+  background-color: var(--vscode-editorInlayHint-parameterBackground);
+  color: var(--vscode-editorInlayHint-parameterForeground);
+  text-shadow: none;
+  line-height: var(--vscode-editorCodeLens-lineHeight);
+}

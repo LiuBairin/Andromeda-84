@@ -55,3 +55,10 @@ export const basePath = (function () {
       : '/' + electronBase + '/workbench/')
   )
 })()
+
+export const compressionCss = (css: string) => {
+  return css
+    .replace(/\s+/g, ' ')
+    .replace(/\/\*.*?\*\//g, '')
+    .trim()
+}
