@@ -130,10 +130,11 @@ export function activate(context: vscode.ExtensionContext) {
           })
       } else {
         vscode.window
-          .showInformationMessage('霓虹灯已经启用。重新加载以刷新设置。', {
-            title: '请重启vscode',
+          .showInformationMessage('霓虹灯已经启用。是否需要关闭？', {
+            title: '关闭',
           })
-          .then(function (msg) {
+          .then(async function (msg) {
+            await deleteScriptInHtml(htmlFile, html)
             vscode.commands.executeCommand('workbench.action.reloadWindow')
           })
       }
@@ -157,8 +158,11 @@ export function activate(context: vscode.ExtensionContext) {
           })
       } else {
         vscode.window
-          .showInformationMessage('霓虹灯已经禁用', { title: '请重启vscode' })
-          .then(function (msg) {
+          .showInformationMessage('霓虹灯已经禁用,是否需要打开', {
+            title: '打开',
+          })
+          .then(async function (msg) {
+            await writeScriptInHtml(htmlFile, html)
             vscode.commands.executeCommand('workbench.action.reloadWindow')
           })
       }
