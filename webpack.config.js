@@ -57,10 +57,10 @@ const extensionConfig = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'css',
+          from: 'src/css',
         },
         {
-          from: 'js',
+          from: 'src/js',
         },
       ],
     }),

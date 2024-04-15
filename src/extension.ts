@@ -1,23 +1,20 @@
 import * as vscode from 'vscode'
 const fs = require('fs')
-import { convertHexadecimal, basePath, compressionCss } from './utils'
-import defaultTokenColors from './config/default_token_colors'
+import { basePath, compressionCss } from './utils'
+import defaultTokenColors from './config/defaultTokenColors'
 
 export const scriptRegExp =
   /^.*(<!-- SYNTHWAVE 84 --><script src="neondreams.js".*?><\/script><!-- NEON DREAMS -->).*\n?/gm
 
 function replaceTokens(styles: string, replacements: Record<string, string>) {
   return Object.keys(replacements).reduce((acc, color) => {
-    const re = new RegExp(`color: #${color};`, 'gi')
+    const re = new RegExp(`color: ${color};`, 'gi')
     return acc.replace(re, replacements[color])
   }, styles)
 }
 
 // 将js写入neondreams
-function writeJsInTemplate(
-  brightness: string,
-  tokenColors: Record<string, string>
-) {
+function writeJsInTemplate(tokenColors: Record<string, string>) {
   return new Promise(resovle => {
     const templateFile = basePath + 'neondreams.js'
     // 读取文件
@@ -33,10 +30,7 @@ function writeJsInTemplate(
 
     const core: string = fs.readFileSync(__dirname + '/core.js', 'utf-8')
 
-    const replaceTheme = replaceTokens(vscodeTokensStyles, tokenColors).replace(
-      /\[NEON_BRIGHTNESS\]/g,
-      brightness
-    )
+    const replaceTheme = replaceTokens(vscodeTokensStyles, tokenColors)
     const finalTheme = compressionCss(`${replaceTheme}${workspaceStyles}`)
     // js文件进行替换
     const corejs = core.replace(/\[FINAL_STYLES\]/g, finalTheme)
@@ -82,19 +76,12 @@ function getHtmlInfo() {
 
 // 获取配置
 function getCinfiguration() {
-  let { brightness, tokenColors } =
-    vscode.workspace.getConfiguration('Andromeda84')
-
-  // 配置项
-  brightness = convertHexadecimal(brightness)
+  let { tokenColors } = vscode.workspace.getConfiguration('Andromeda84')
 
   // 颜色
-  tokenColors = Object.keys(tokenColors).length
-    ? { ...defaultTokenColors, ...tokenColors }
-    : defaultTokenColors
+  tokenColors = { ...defaultTokenColors, ...tokenColors }
 
   return {
-    brightness,
     tokenColors,
   }
 }
@@ -103,9 +90,9 @@ export function activate(context: vscode.ExtensionContext) {
   const enableNeon = vscode.commands.registerCommand(
     'Andromeda84.enableNeon',
     async () => {
-      const { brightness, tokenColors } = getCinfiguration()
+      const { tokenColors } = getCinfiguration()
 
-      await writeJsInTemplate(brightness, tokenColors)
+      await writeJsInTemplate(tokenColors)
 
       const { isEnabled, htmlFile, html } = getHtmlInfo()
 
@@ -123,18 +110,17 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window
           .showInformationMessage(
             '霓虹灯已开启。必须重新加载vscode才能使此更改生效。代码可能会显示已损坏的警告，这是正常的。您可以通过在通知上选择“不再显示此消息”来取消此消息。',
-            { title: '请重启vscode' }
+            { title: '重启vscode' }
           )
           .then(function (msg) {
             vscode.commands.executeCommand('workbench.action.reloadWindow')
           })
       } else {
         vscode.window
-          .showInformationMessage('霓虹灯已经启用。是否需要关闭？', {
-            title: '关闭',
+          .showInformationMessage('最新的配置重载完成,请重启vscode进行更新', {
+            title: '重启vscode',
           })
           .then(async function (msg) {
-            await deleteScriptInHtml(htmlFile, html)
             vscode.commands.executeCommand('workbench.action.reloadWindow')
           })
       }
@@ -151,18 +137,17 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window
           .showInformationMessage(
             '霓虹灯已禁用。必须重新加载vscode才能使此更改生效',
-            { title: '请重启vscode' }
+            { title: '重启vscode' }
           )
           .then(function (msg) {
             vscode.commands.executeCommand('workbench.action.reloadWindow')
           })
       } else {
         vscode.window
-          .showInformationMessage('霓虹灯已经禁用,是否需要打开', {
-            title: '打开',
+          .showInformationMessage('当前霓虹灯暂未启用', {
+            title: '重启vscode',
           })
           .then(async function (msg) {
-            await writeScriptInHtml(htmlFile, html)
             vscode.commands.executeCommand('workbench.action.reloadWindow')
           })
       }

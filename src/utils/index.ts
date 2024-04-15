@@ -1,20 +1,6 @@
 const vscode = require('vscode')
 const moudle = require('module')
 const path = require('path')
-/**
- * @summary 小数转换16进制
- * @param float
- * @returns
- */
-export function convertHexadecimal(float: number) {
-  let num = float >= 1 ? 1 : float
-
-  num = num <= 0 ? 0 : num
-
-  return Math.floor(num * 255)
-    .toString(16)
-    .toUpperCase()
-}
 
 /**
  * @summary 比较版本

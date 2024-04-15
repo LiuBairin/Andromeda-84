@@ -1,8 +1,8 @@
 {
   "name": "andromeda84-vscode",
   "displayName": "Andromeda'84",
-  "description": "灵感来自于Andromeda和SynthWave'84",
-  "version": "1.0.2",
+  "description": "一款结合Andromeda和SynthWave'84的vscode主题",
+  "version": "1.0.3",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -50,17 +50,10 @@
     "configuration": {
       "title": "Andromeda'84",
       "properties": {
-        "Andromeda84.brightness": {
-          "type": "number",
-          "default": 0.6,
-          "description": "设置霓虹灯亮度,0-1",
-          "minimum": 0,
-          "maximum": 1
-        },
         "Andromeda84.tokenColors": {
           "type": "object",
           "default": {},
-          "description": "设置霓虹颜色,来替换默认设置"
+          "description": "设置tokenColors"
         }
       }
     }
