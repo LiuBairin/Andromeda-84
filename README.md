@@ -23,6 +23,11 @@
 ![png](https://www.098540.xyz/Andromeda'84-black.png)
 
 <br/>
+
+</div>
+
+> 默认配置可以根据自己的喜好进行更改
+
 <br/>
 
 ```js
@@ -45,14 +50,7 @@
 // .mtk16 { color: #f44747; }
 // .mtk17 { color: #b267e6; }
 //==========================>
-```
-
-</div>
-
-> 默认配置可以根据自己的喜好进行更改
-
-```js
-defaultTokenColors = {
+{
   '#ffe66d':
     'color: #f4eee4; text-shadow: 0 0 2px #393a33, 0 0 8px #f39f057f, 0 0 2px #f39f057f;',
   '#f39c12':
