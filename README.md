@@ -51,7 +51,7 @@
 
 > 默认配置可以根据自己的喜好进行更改
 
-```json
+```js
 {
   "#ffe66d": "color: #f4eee4; text-shadow: 0 0 2px #393a33, 0 0 8px #f39f057f, 0 0 2px #f39f057f;",
   "#f39c12": "color: #f39c12; text-shadow: 0 0 2px #001716, 0 0 3px #f39c127f, 0 0 5px #f39c127f;",

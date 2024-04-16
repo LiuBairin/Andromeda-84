@@ -2,7 +2,7 @@
   "name": "andromeda84-vscode",
   "displayName": "Andromeda'84",
   "description": "一款结合Andromeda和SynthWave'84的vscode主题",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "engines": {
     "vscode": "^1.75.0"
   },
