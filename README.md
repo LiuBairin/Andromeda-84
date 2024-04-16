@@ -24,10 +24,6 @@
 
 <br/>
 
-</div>
-
-> 默认配置可以根据自己的喜好进行更改
-
 <br/>
 
 ```js
@@ -50,24 +46,12 @@
 // .mtk16 { color: #f44747; }
 // .mtk17 { color: #b267e6; }
 //==========================>
-{
-  '#ffe66d':
-    'color: #f4eee4; text-shadow: 0 0 2px #393a33, 0 0 8px #f39f057f, 0 0 2px #f39f057f;',
-  '#f39c12':
-    'color: #f39c12; text-shadow: 0 0 2px #001716, 0 0 3px #f39c127f, 0 0 5px #f39c127f;',
-  '#c6c0ff':
-    'color: #c792ea; text-shadow: 0 0 2px #001716, 0 0 3px #ae46f37f, 0 0 5px #ba6eec7f, 0 0 8px #c792ea7f;',
-  '#d5ced9':
-    'color: #fdfdfd; text-shadow: 0 0 5px #001716, 0 0 5px #03edf97f, 0 0 7px #03edf97f, 0 0 10px #03edf97f;',
-  '#c74ded': 'color: #c74ded; text-shadow: 0 0 2px #001716, 0 0 5px #c74ded7f;',
-  '#00e8c6':
-    'color: #00e8c6 ; text-shadow: 0 0 2px #001716, 0 0 3px #03edf97f, 0 0 5px #03edf97f, 0 0 8px #03edf97f;',
-}
 ```
 
-<br/>
+</div>
 
-<br/>
+> 设置中搜索 Token Colors 可以对原配置进行更改,可以更改的颜色已经在上面给出
+> <br/>
 
 > 欢迎 star!
 
