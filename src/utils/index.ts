@@ -29,8 +29,9 @@ export const basePath = (function () {
 
   const require = createRequire('/')
 
-  const base =
-    path.dirname(require.main.filename) + (isWin ? '\\vs\\code' : '/vs/code')
+  const filename = require.main?.filename || process.mainModule?.filename
+
+  const base = path.dirname(filename) + (isWin ? '\\vs\\code' : '/vs/code')
   const electronBase = isVSCodeBelowVersion()
     ? 'electron-browser'
     : 'electron-sandbox'
