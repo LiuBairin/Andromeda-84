@@ -1,7 +1,9 @@
 import * as vscode from 'vscode'
 const fs = require('fs')
-import { basePath, compressionCss } from './utils'
+import { getFilePath, compressionCss } from './utils'
 import defaultTokenColors from './config/defaultTokenColors'
+
+const { htmlFile, templateFile } = getFilePath()
 
 export const scriptRegExp =
   /^.*(<!-- SYNTHWAVE 84 --><script src="neondreams.js".*?><\/script><!-- NEON DREAMS -->).*\n?/gm
@@ -16,7 +18,6 @@ function replaceTokens(styles: string, replacements: Record<string, string>) {
 // 将js写入neondreams
 function writeJsInTemplate(tokenColors: Record<string, string>) {
   return new Promise(resovle => {
-    const templateFile = basePath + 'neondreams.js'
     // 读取文件
     const workspaceStyles: string = fs.readFileSync(
       __dirname + '/workspace-style.css',
@@ -68,10 +69,9 @@ function deleteScriptInHtml(htmlFile: string, html: string) {
 
 // 获取html的相关信息
 function getHtmlInfo() {
-  const htmlFile = basePath + 'workbench.html'
   const html = fs.readFileSync(htmlFile, 'utf-8')
   const isEnabled = html.includes('neondreams.js')
-  return { isEnabled, htmlFile, html }
+  return { isEnabled, html }
 }
 
 // 获取配置
@@ -94,7 +94,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       await writeJsInTemplate(tokenColors)
 
-      const { isEnabled, htmlFile, html } = getHtmlInfo()
+      const { isEnabled, html } = getHtmlInfo()
 
       if (!isEnabled) {
         try {
@@ -130,7 +130,7 @@ export function activate(context: vscode.ExtensionContext) {
   const disableNeon = vscode.commands.registerCommand(
     'Andromeda84.disableNeon',
     async () => {
-      const { isEnabled, htmlFile, html } = getHtmlInfo()
+      const { isEnabled, html } = getHtmlInfo()
 
       if (isEnabled) {
         await deleteScriptInHtml(htmlFile, html)

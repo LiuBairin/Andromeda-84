@@ -1,5 +1,4 @@
 const vscode = require('vscode')
-const moudle = require('module')
 const path = require('path')
 
 /**
@@ -21,27 +20,33 @@ export function isVSCodeBelowVersion(version: string = '1.70.0') {
   return false
 }
 
-export const basePath = (function () {
-  const isWin = /^win/.test(process.platform)
+export const getFilePath = function () {
 
-  // 解决webpack打包require的问题
-  const { createRequire } = moudle
+  const appDir = path.dirname(vscode.env.appRoot)
 
-  const require = createRequire('/')
+  const base = path.join(appDir, 'app', 'out', 'vs', 'code')
 
-  const filename = require.main?.filename || process.mainModule?.filename
-
-  const base = path.dirname(filename) + (isWin ? '\\vs\\code' : '/vs/code')
   const electronBase = isVSCodeBelowVersion()
     ? 'electron-browser'
     : 'electron-sandbox'
-  return (
-    base +
-    (isWin
-      ? '\\' + electronBase + '\\workbench\\'
-      : '/' + electronBase + '/workbench/')
+
+  const workBenchFilename =
+    vscode.version == '1.94.0' ? 'workbench.esm.html' : 'workbench.html'
+
+  const htmlFile = path.join(base, electronBase, 'workbench', workBenchFilename)
+
+  const templateFile = path.join(
+    base,
+    electronBase,
+    'workbench',
+    'neondreams.js'
   )
-})()
+
+  return {
+    htmlFile,
+    templateFile,
+  }
+}
 
 export const compressionCss = (css: string) => {
   return css
